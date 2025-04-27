@@ -1,0 +1,71 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings("ignore")
+%matplotlib inline
+
+# Load data and basic stats
+df = pd.read_csv("train.csv")
+df.shape
+df.head()
+df.info()
+df.describe()
+df.isna().sum()
+
+# Fill missing Age values with mean
+df["Age"] = df["Age"].fillna(df["Age"].mean())
+df.isna().sum()
+
+# Visualization and basic exploration
+print(df["Sex"].value_counts())
+print(df["Ticket"].value_counts())
+print(df["Cabin"].value_counts())
+print(df["Embarked"].value_counts())
+
+# Mapping Sex and Embarked columns
+def fun1(value):
+    return 1 if value == "male" else 0
+
+def fun2(value):
+    if value == 'S':
+        return 0
+    elif value == 'C':
+        return 1
+    elif value == 'Q':
+        return 2
+    else:
+        return 0
+
+df["Sex"] = df["Sex"].apply(fun1)
+df["Embarked"] = df["Embarked"].apply(fun2)
+print(df.isna().sum())
+
+# Drop Cabin column
+df = df.drop("Cabin", axis=1)
+print(df.shape)
+
+# Correlation heatmap
+plt.figure(figsize=(10,7))
+sns.heatmap(df.corr(), annot=True)
+plt.show()
+
+# Info after cleaning
+print(df.info())
+
+# Visualizations
+sns.countplot(df["Survived"])
+plt.show()
+
+sns.countplot(df["Pclass"], hue=df["Survived"])
+plt.show()
+
+sns.countplot(df["Sex"], hue=df["Survived"], palette="Accent")
+plt.show()
+
+sns.countplot(df["Embarked"], hue=df["Survived"])
+plt.show()
+
+sns.histplot(df["Fare"])
+plt.show()

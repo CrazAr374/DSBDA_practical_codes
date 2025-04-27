@@ -1,0 +1,8 @@
+import pandas as pd
+import numpy as nm
+df = pd.read_csv(".csv")
+df
+df.describe()
+df["SepalLengthCm"].describe()
+df.groupby("Species").describe()
+df.groupby("Species").describe().sum()

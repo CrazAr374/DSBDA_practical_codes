@@ -1,0 +1,70 @@
+# Importing libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+from sklearn.datasets import load_iris
+import warnings
+warnings.filterwarnings("ignore")
+
+# Load and preprocess data
+data = load_iris()
+df = pd.DataFrame(data['data'], columns=data['feature_names'])
+df['label'] = data['target']
+
+# Basic information
+print(df.shape)
+print(df.head())
+print(df.info())
+print(df.describe())
+
+# Visualization
+
+# Heatmap
+plt.figure(figsize=(8,6))
+sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
+plt.title("Correlation Heatmap")
+plt.show()
+
+# Histograms
+plt.figure(figsize=(8,4))
+sns.histplot(df["sepal length (cm)"], kde=True, color='blue')
+plt.title("Distribution of Sepal Length")
+plt.show()
+
+plt.figure(figsize=(8,4))
+sns.histplot(df["sepal width (cm)"], kde=True, color='green')
+plt.title("Distribution of Sepal Width")
+plt.show()
+
+plt.figure(figsize=(8,4))
+sns.histplot(df["petal length (cm)"], kde=True, color='red')
+plt.title("Distribution of Petal Length")
+plt.show()
+
+plt.figure(figsize=(8,4))
+sns.histplot(df["petal width (cm)"], kde=True, color='purple')
+plt.title("Distribution of Petal Width")
+plt.show()
+
+# Boxplots
+plt.figure(figsize=(8,5))
+sns.boxplot(x='label', y="sepal length (cm)", data=df)
+plt.title("Sepal Length by Label")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.boxplot(x='label', y="sepal width (cm)", data=df)
+plt.title("Sepal Width by Label")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.boxplot(x='label', y="petal length (cm)", data=df)
+plt.title("Petal Length by Label")
+plt.show()
+
+plt.figure(figsize=(8,5))
+sns.boxplot(x='label', y="petal width (cm)", data=df)
+plt.title("Petal Width by Label")
+plt.show()

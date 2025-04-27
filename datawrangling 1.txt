@@ -1,0 +1,18 @@
+import pandas as pd
+import numpy as nm
+df = pd.read_csv(".csv file")
+df
+df.isnull()
+df.notnull()
+df.isnull().sum()
+df.notnull.sum()
+df.describe()
+df.size
+df.ndim
+df.shape
+df,info()
+df.dropna()
+df = df.dropna()
+df["SepalLengthCm"].astype(int)
+de["Species"].replace({"Iris-setosa":0, "Iris-virginica":1})
+df

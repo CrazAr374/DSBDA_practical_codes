@@ -1,0 +1,51 @@
+# Download required NLTK packages
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("wordnet")
+nltk.download("averaged_perceptron_tagger")
+
+# Tokenization
+from nltk import word_tokenize, sent_tokenize
+corpus = "Sachin was the GOAT of the previous generation. Virat is the GOAT of this generation. Shubman will be the GOAT of the next generation."
+print(word_tokenize(corpus))
+print(sent_tokenize(corpus))
+
+# POS tagging
+from nltk import pos_tag
+tokens = word_tokenize(corpus)
+print(pos_tag(tokens))
+
+# Stop word removal
+from nltk.corpus import stopwords
+stop_words = set(stopwords.words("english"))
+cleaned_tokens = [token for token in tokens if token.lower() not in stop_words]
+print(cleaned_tokens)
+
+# Stemming
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
+stemmed_tokens = [stemmer.stem(token) for token in cleaned_tokens]
+print(stemmed_tokens)
+
+# Lemmatization
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [lemmatizer.lemmatize(token) for token in cleaned_tokens]
+print(lemmatized_tokens)
+
+# TF-IDF
+from sklearn.feature_extraction.text import TfidfVectorizer
+corpus = [
+    "Sachin was the GOAT of the previous generation",
+    "Virat is the GOAT of this generation",
+    "Shubman will be the GOAT of the next generation"
+]
+vectorizer = TfidfVectorizer()
+matrix = vectorizer.fit(corpus)
+print(matrix.vocabulary_)
+
+tfidf_matrix = vectorizer.transform(corpus)
+print(tfidf_matrix)
+
+print(vectorizer.get_feature_names_out())

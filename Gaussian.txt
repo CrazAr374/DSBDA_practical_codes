@@ -1,0 +1,27 @@
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score, recall_score
+df = pd.read_csv("/home/comp/Desktop/Iris (1).csv")
+df
+df.columns
+x = df.drop('Species', axis = 1)
+y = df.Species
+y
+x_train,x_test, y_train, y_test = train_test_split(x,y,test_size = 0.25
+model = GaussianNB()
+model.fit(x_train, y_train.values.ravel())
+y_pred = model.predict(x_test)
+y_pred
+cm = confusion_matrix(y_test, y_pred)
+cm
+print(tn,fp,fn,tp)
+a = accuracy_score(y_test, y_pred)
+a
+e = 1-a
+e
+precision_score(y_test, y_pred, average='macro')
+recall_score(y_test,y_pred,average = 'macro')
